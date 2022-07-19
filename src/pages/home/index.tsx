@@ -1,12 +1,13 @@
 import { FC } from 'react'
 
-import { HomeIntro } from './components/intro'
+import { CoffeeList } from './components/coffee-list'
+import { Intro } from './components/intro'
 
 export const HomePage: FC = () => {
   return (
     <div>
-      <HomeIntro />
-      teste
+      <Intro />
+      <CoffeeList />
     </div>
   )
 }

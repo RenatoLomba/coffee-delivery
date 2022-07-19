@@ -8,7 +8,7 @@ import {
   IntroItemsContainer,
 } from './styles'
 
-export const HomeIntro: FC = () => {
+export const Intro: FC = () => {
   return (
     <IntroContainer>
       <div>
