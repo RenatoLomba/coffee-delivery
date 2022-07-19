@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     background: ${(props) => props.theme.colors['gray-100']};
     color: ${(props) => props.theme.colors['gray-700']};
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
 
   body, input, textarea, button {

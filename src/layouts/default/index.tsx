@@ -1,15 +1,18 @@
 import { FC, ReactNode } from 'react'
 
+import { Header } from '../../components/header'
+import { DefaultLayoutContainer } from './styles'
+
 type DefaultLayoutProps = {
   children: ReactNode
 }
 
 export const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
   return (
-    <div>
-      <header>Header</header>
+    <DefaultLayoutContainer>
+      <Header />
 
       {children}
-    </div>
+    </DefaultLayoutContainer>
   )
 }
