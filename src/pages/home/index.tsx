@@ -1,5 +1,12 @@
 import { FC } from 'react'
 
+import { HomeIntro } from './components/intro'
+
 export const HomePage: FC = () => {
-  return <h1>HomePage</h1>
+  return (
+    <div>
+      <HomeIntro />
+      teste
+    </div>
+  )
 }

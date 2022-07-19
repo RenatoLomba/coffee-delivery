@@ -12,7 +12,7 @@ export const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
     <DefaultLayoutContainer>
       <Header />
 
-      {children}
+      <main>{children}</main>
     </DefaultLayoutContainer>
   )
 }

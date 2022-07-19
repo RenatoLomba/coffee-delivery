@@ -50,3 +50,5 @@ export const defaultTheme = {
     md: '8px',
   },
 }
+
+export type DefaultThemeColors = keyof typeof defaultTheme.colors
