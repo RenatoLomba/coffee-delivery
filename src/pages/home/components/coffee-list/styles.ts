@@ -29,6 +29,7 @@ export const CoffeeCard = styled.div`
   p {
     color: ${(props) => props.theme.colors['gray-600']};
     margin-top: 0.5rem;
+    height: 5rem;
   }
 `
 
@@ -48,7 +49,6 @@ export const CoffeeBuy = styled.footer`
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  margin-top: 2.25rem;
 
   & > span > strong {
     font-size: ${(props) => props.theme.fontSizes.text['3xl']};

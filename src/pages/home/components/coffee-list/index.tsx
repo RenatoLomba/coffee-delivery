@@ -1,6 +1,7 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { FC } from 'react'
 
+import db from '../../../../db.json'
 import {
   CoffeeActions,
   CoffeeBuy,
@@ -18,16 +19,16 @@ export const CoffeeList: FC = () => {
       </header>
 
       <main>
-        {[...new Array(10)].map((key) => (
-          <CoffeeCard key={key}>
-            <img src="/expresso-tradicional.png" alt="" />
+        {db.coffee.map((coffee) => (
+          <CoffeeCard key={coffee.id}>
+            <img src={coffee.imgUrl} alt={coffee.name} />
             <CoffeeTag>Tradicional</CoffeeTag>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
+            <h3>{coffee.name}</h3>
+            <p>{coffee.description}</p>
 
             <CoffeeBuy>
               <span>
-                R$ <strong>9,90</strong>
+                R$ <strong>{coffee.price}</strong>
               </span>
 
               <CoffeeActions>
@@ -35,7 +36,7 @@ export const CoffeeList: FC = () => {
                   <button>
                     <Minus size={14} weight="fill" />
                   </button>
-                  <span>1</span>
+                  <span>0</span>
                   <button>
                     <Plus size={14} weight="fill" />
                   </button>
