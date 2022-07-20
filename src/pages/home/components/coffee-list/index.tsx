@@ -9,6 +9,7 @@ import {
   CoffeeCounter,
   CoffeeListContainer,
   CoffeeTag,
+  CoffeeTagsContainer,
 } from './styles'
 
 export const CoffeeList: FC = () => {
@@ -22,20 +23,21 @@ export const CoffeeList: FC = () => {
         {db.coffee.map((coffee) => (
           <CoffeeCard key={coffee.id}>
             <img src={coffee.imgUrl} alt={coffee.name} />
-            <CoffeeTag>Tradicional</CoffeeTag>
+            <CoffeeTagsContainer>
+              {coffee.tags.map((tag) => (
+                <CoffeeTag key={tag.key}>{tag.name}</CoffeeTag>
+              ))}
+            </CoffeeTagsContainer>
             <h3>{coffee.name}</h3>
             <p>{coffee.description}</p>
 
             <CoffeeBuy>
               <span>
-                R$
                 <strong>
                   {new Intl.NumberFormat('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
-                  })
-                    .format(coffee.price)
-                    .replace('R$', '')}
+                  }).format(coffee.price)}
                 </strong>
               </span>
 

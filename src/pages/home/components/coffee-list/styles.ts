@@ -3,11 +3,30 @@ import styled from 'styled-components'
 export const CoffeeListContainer = styled.section`
   padding: 2rem 0;
 
+  @media screen and (max-width: 540px) {
+    header {
+      text-align: center;
+    }
+  }
+
   main {
     padding-top: 3.375rem;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
     gap: 2rem;
+
+    @media screen and (max-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: 840px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (max-width: 540px) {
+      grid-template-columns: 1fr;
+    }
   }
 `
 
@@ -33,6 +52,11 @@ export const CoffeeCard = styled.div`
   }
 `
 
+export const CoffeeTagsContainer = styled.header`
+  display: flex;
+  gap: 0.5rem;
+`
+
 export const CoffeeTag = styled.span`
   background: ${(props) => props.theme.colors['yellow-300']};
   color: ${(props) => props.theme.colors['yellow-700']};
@@ -42,6 +66,7 @@ export const CoffeeTag = styled.span`
   font-size: ${(props) => props.theme.fontSizes.text.xs};
   text-transform: uppercase;
   margin-bottom: 1rem;
+  user-select: none;
 `
 
 export const CoffeeBuy = styled.footer`
@@ -94,6 +119,7 @@ export const CoffeeCounter = styled.div`
   span {
     color: ${(props) => props.theme.colors['gray-900']};
     font-size: ${(props) => props.theme.fontSizes.text.lg};
+    user-select: none;
   }
 
   button {
