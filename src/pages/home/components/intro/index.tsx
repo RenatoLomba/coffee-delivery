@@ -1,4 +1,4 @@
-import { ArchiveBox, Coffee, ShoppingCart, Timer } from 'phosphor-react'
+import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import { FC } from 'react'
 
 import {
@@ -29,7 +29,7 @@ export const Intro: FC = () => {
           </IntroItem>
           <IntroItem bgColorKey="gray">
             <span>
-              <ArchiveBox size={16} weight="fill" />
+              <Package size={16} weight="fill" />
             </span>
             <p>Embalagens mantém o café intacto</p>
           </IntroItem>
