@@ -98,10 +98,15 @@ export const CoffeeActions = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.2s ease;
 
     &:focus {
       outline: 0;
       box-shadow: 0 0 0 2px ${(props) => props.theme.colors['purple-500']};
+    }
+
+    &:hover {
+      background: ${(props) => props.theme.colors['purple-500']};
     }
   }
 `
@@ -129,5 +134,10 @@ export const CoffeeCounter = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: ${(props) => props.theme.colors['purple-500']};
+
+    &:hover {
+      color: ${(props) => props.theme.colors['purple-700']};
+    }
   }
 `
