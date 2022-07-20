@@ -8,6 +8,11 @@ export const HeaderContainer = styled.header`
   align-items: center;
   gap: 0.5rem;
 
+  a {
+    width: 85px;
+    height: 40px;
+  }
+
   nav {
     display: flex;
     gap: 0.75rem;

@@ -1,21 +1,15 @@
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Money,
-} from 'phosphor-react'
+import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import { FC } from 'react'
 
 import { CoffeeItem } from './components/coffee-item'
+import { PaymentMethods } from './components/payment-methods'
+import { ShippingAddressForm } from './components/shipping-address-form'
 import {
   CheckoutContainer,
   OrderInfoSection,
-  OrderPaymentMethods,
   OrderPricingTotal,
   OrderSelectedCoffeeList,
   OrderSelectedCoffeeSection,
-  OrderShippingAddressForm,
   SubmitOrderButton,
 } from './styles'
 
@@ -37,26 +31,7 @@ export const CheckoutPage: FC = () => {
               </div>
             </header>
 
-            <OrderShippingAddressForm>
-              <div className="form-row">
-                <input type="text" placeholder="CEP" className="w-4" />
-              </div>
-
-              <div className="form-row">
-                <input type="text" placeholder="Rua" />
-              </div>
-
-              <div className="form-row">
-                <input type="number" placeholder="Número" className="w-4" />
-                <input type="text" placeholder="Complemento" />
-              </div>
-
-              <div className="form-row">
-                <input type="text" placeholder="Bairro" className="w-4" />
-                <input type="text" placeholder="Cidade" className="w-5" />
-                <input type="text" placeholder="UF" className="w-1" />
-              </div>
-            </OrderShippingAddressForm>
+            <ShippingAddressForm />
           </div>
           <div className="card">
             <header>
@@ -70,20 +45,7 @@ export const CheckoutPage: FC = () => {
               </div>
             </header>
 
-            <OrderPaymentMethods>
-              <button type="button" className="pay-card active">
-                <CreditCard size={16} />
-                <span>Cartão de Crédito</span>
-              </button>
-              <button type="button" className="pay-card">
-                <Bank size={16} />
-                <span>Cartão de Débito</span>
-              </button>
-              <button type="button" className="pay-card">
-                <Money size={16} />
-                <span>Dinheiro</span>
-              </button>
-            </OrderPaymentMethods>
+            <PaymentMethods />
           </div>
         </div>
       </OrderInfoSection>
