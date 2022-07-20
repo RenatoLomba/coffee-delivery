@@ -1,12 +1,12 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
 import { FC } from 'react'
 
+import { Counter } from '../../../../components/counter'
 import db from '../../../../db.json'
 import {
   CoffeeActions,
   CoffeeBuy,
   CoffeeCard,
-  CoffeeCounter,
   CoffeeListContainer,
   CoffeeTag,
   CoffeeTagsContainer,
@@ -42,15 +42,7 @@ export const CoffeeList: FC = () => {
               </span>
 
               <CoffeeActions>
-                <CoffeeCounter>
-                  <button>
-                    <Minus size={14} weight="fill" />
-                  </button>
-                  <span>0</span>
-                  <button>
-                    <Plus size={14} weight="fill" />
-                  </button>
-                </CoffeeCounter>
+                <Counter />
 
                 <button>
                   <ShoppingCart weight="fill" size={20} />

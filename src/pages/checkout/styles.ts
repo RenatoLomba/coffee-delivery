@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const CheckoutContainer = styled.form`
-  height: calc(100vh - 104px);
+  min-height: calc(100vh - 104px);
   padding-top: 2.5rem;
   display: grid;
   grid-template-columns: minmax(448px, 3fr) 2fr;
@@ -10,13 +10,13 @@ export const CheckoutContainer = styled.form`
   @media screen and (max-width: 966px) {
     grid-template-columns: 1fr;
   }
-`
 
-export const OrderInfoSection = styled.section`
   h4 {
     margin-bottom: 1rem;
   }
+`
 
+export const OrderInfoSection = styled.section`
   .container {
     display: flex;
     flex-direction: column;
@@ -123,6 +123,14 @@ export const OrderPaymentMethods = styled.div`
     border: 1px solid transparent;
     transition: all 0.2s ease;
 
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:focus:not(.active) {
+      box-shadow: 0 0 0 2px ${(props) => props.theme.colors['purple-500']};
+    }
+
     &.active {
       background: ${(props) => props.theme.colors['purple-300']};
       color: ${(props) => props.theme.colors['purple-500']};
@@ -144,4 +152,59 @@ export const OrderPaymentMethods = styled.div`
   }
 `
 
-export const OrderSelectedCoffeeSection = styled.section``
+export const OrderSelectedCoffeeSection = styled.section`
+  .container {
+    background: ${(props) => props.theme.colors['gray-200']};
+    padding: 2.5rem;
+    border-radius: ${(props) => props.theme.radius.md};
+  }
+`
+
+export const OrderSelectedCoffeeList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: ${(props) => props.theme.colors['gray-400']};
+  }
+`
+
+export const OrderPricingTotal = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-top: 1.5rem;
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    strong {
+      font-size: ${(props) => props.theme.fontSizes.text.xl};
+    }
+  }
+`
+
+export const SubmitOrderButton = styled.button`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: ${(props) => props.theme.colors['yellow-500']};
+  padding: 0.75rem 0;
+  border-radius: ${(props) => props.theme.radius.md};
+  margin-top: 1.5rem;
+  border: none;
+  color: ${(props) => props.theme.colors.white};
+  text-transform: uppercase;
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  cursor: pointer;
+
+  &:focus {
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors['yellow-700']};
+  }
+`

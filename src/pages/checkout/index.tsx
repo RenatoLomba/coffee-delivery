@@ -7,12 +7,16 @@ import {
 } from 'phosphor-react'
 import { FC } from 'react'
 
+import { CoffeeItem } from './components/coffee-item'
 import {
   CheckoutContainer,
   OrderInfoSection,
   OrderPaymentMethods,
+  OrderPricingTotal,
+  OrderSelectedCoffeeList,
   OrderSelectedCoffeeSection,
   OrderShippingAddressForm,
+  SubmitOrderButton,
 } from './styles'
 
 export const CheckoutPage: FC = () => {
@@ -67,25 +71,66 @@ export const CheckoutPage: FC = () => {
             </header>
 
             <OrderPaymentMethods>
-              <div className="pay-card active">
+              <button type="button" className="pay-card active">
                 <CreditCard size={16} />
                 <span>Cartão de Crédito</span>
-              </div>
-              <div className="pay-card">
+              </button>
+              <button type="button" className="pay-card">
                 <Bank size={16} />
                 <span>Cartão de Débito</span>
-              </div>
-              <div className="pay-card">
+              </button>
+              <button type="button" className="pay-card">
                 <Money size={16} />
                 <span>Dinheiro</span>
-              </div>
+              </button>
             </OrderPaymentMethods>
           </div>
         </div>
       </OrderInfoSection>
 
-      <OrderSelectedCoffeeSection style={{ background: 'blue' }}>
-        teste
+      <OrderSelectedCoffeeSection>
+        <h4>Cafés selecionados</h4>
+
+        <div className="container">
+          <OrderSelectedCoffeeList>
+            <CoffeeItem
+              coffee={{
+                id: 1,
+                name: 'Expresso Tradicional',
+                imgUrl: '/expresso-tradicional.png',
+                price: 9.9,
+              }}
+            />
+            <div className="divider"></div>
+
+            <CoffeeItem
+              coffee={{
+                id: 2,
+                name: 'Latte',
+                imgUrl: '/latte.png',
+                price: 18.97,
+              }}
+            />
+            <div className="divider"></div>
+          </OrderSelectedCoffeeList>
+
+          <OrderPricingTotal>
+            <div>
+              <span>Total de itens</span>
+              <span>R$ 29,70</span>
+            </div>
+            <div>
+              <span>Entrega</span>
+              <span>R$ 3,50</span>
+            </div>
+            <div>
+              <strong>Total</strong>
+              <strong>R$ 33,20</strong>
+            </div>
+          </OrderPricingTotal>
+
+          <SubmitOrderButton type="submit">teste</SubmitOrderButton>
+        </div>
       </OrderSelectedCoffeeSection>
     </CheckoutContainer>
   )
