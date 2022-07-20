@@ -28,7 +28,15 @@ export const CoffeeList: FC = () => {
 
             <CoffeeBuy>
               <span>
-                R$ <strong>{coffee.price}</strong>
+                R$
+                <strong>
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })
+                    .format(coffee.price)
+                    .replace('R$', '')}
+                </strong>
               </span>
 
               <CoffeeActions>
