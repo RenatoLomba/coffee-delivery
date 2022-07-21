@@ -116,3 +116,26 @@ export const SubmitOrderButton = styled.button`
     box-shadow: 0 0 0 2px ${(props) => props.theme.colors['yellow-700']};
   }
 `
+
+export const EmptyCartContainer = styled.div`
+  height: calc(100vh - 104px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    font-size: ${(props) => props.theme.fontSizes.heading.lg};
+    font-family: ${(props) => props.theme.fontFamilies.baloo2};
+    font-weight: ${(props) => props.theme.fontWeights.extrabold};
+    color: ${(props) => props.theme.colors['gray-500']};
+    padding: 2rem 3rem;
+    border: 5px dashed ${(props) => props.theme.colors['gray-500']};
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: ${(props) => props.theme.colors['yellow-500']};
+      border-color: ${(props) => props.theme.colors['yellow-500']};
+    }
+  }
+`

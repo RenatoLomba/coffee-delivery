@@ -1,11 +1,15 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
-import { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 
+import { Link } from '@tanstack/react-location'
+
+import { useShoppingCart } from '../../contexts/shopping-cart'
 import { CoffeeItem } from './components/coffee-item'
 import { PaymentMethods } from './components/payment-methods'
 import { ShippingAddressForm } from './components/shipping-address-form'
 import {
   CheckoutContainer,
+  EmptyCartContainer,
   OrderInfoSection,
   OrderPricingTotal,
   OrderSelectedCoffeeList,
@@ -13,7 +17,35 @@ import {
   SubmitOrderButton,
 } from './styles'
 
+const currencyFormatted = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+})
+
 export const CheckoutPage: FC = () => {
+  const { coffees } = useShoppingCart()
+
+  const itemsTotal = useMemo(() => {
+    if (coffees.size === 0) return 0
+
+    return [...coffees.values()].reduce((total, coffee) => {
+      total += coffee.price * coffee.qty
+      return total
+    }, 0)
+  }, [coffees])
+
+  const shippingPrice = itemsTotal * 0.1
+
+  const orderTotalPrice = itemsTotal + shippingPrice
+
+  if (coffees.size === 0) {
+    return (
+      <EmptyCartContainer>
+        <Link to="/">Carrinho de compras vazio</Link>
+      </EmptyCartContainer>
+    )
+  }
+
   return (
     <CheckoutContainer>
       <OrderInfoSection>
@@ -55,39 +87,26 @@ export const CheckoutPage: FC = () => {
 
         <div className="container">
           <OrderSelectedCoffeeList>
-            <CoffeeItem
-              coffee={{
-                id: 1,
-                name: 'Expresso Tradicional',
-                imgUrl: '/expresso-tradicional.png',
-                price: 9.9,
-              }}
-            />
-            <div className="divider"></div>
-
-            <CoffeeItem
-              coffee={{
-                id: 2,
-                name: 'Latte',
-                imgUrl: '/latte.png',
-                price: 18.97,
-              }}
-            />
-            <div className="divider"></div>
+            {[...coffees.entries()].map(([key, coffee]) => (
+              <React.Fragment key={key}>
+                <CoffeeItem id={key} />
+                <div className="divider"></div>
+              </React.Fragment>
+            ))}
           </OrderSelectedCoffeeList>
 
           <OrderPricingTotal>
             <div>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>{currencyFormatted.format(itemsTotal)}</span>
             </div>
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>{currencyFormatted.format(shippingPrice)}</span>
             </div>
             <div>
               <strong>Total</strong>
-              <strong>R$ 33,20</strong>
+              <strong>{currencyFormatted.format(orderTotalPrice)}</strong>
             </div>
           </OrderPricingTotal>
 

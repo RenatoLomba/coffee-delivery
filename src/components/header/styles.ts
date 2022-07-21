@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   gap: 0.5rem;
 
-  a {
+  & > a {
     width: 85px;
     height: 40px;
   }
@@ -17,7 +17,27 @@ export const HeaderContainer = styled.header`
     display: flex;
     gap: 0.75rem;
 
-    span {
+    a {
+      font-weight: ${(props) => props.theme.fontWeights.bold};
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 0.25rem;
+
+      & > svg {
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        color: ${(props) => props.theme.colors['yellow-500']};
+      }
+
+      @media screen and (max-width: 488px) {
+        display: none;
+      }
+    }
+
+    & > span {
       background: ${(props) => props.theme.colors['purple-300']};
       border-radius: ${(props) => props.theme.radius.md};
       color: ${(props) => props.theme.colors['purple-700']};
