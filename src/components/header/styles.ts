@@ -63,7 +63,19 @@ export const HeaderContainer = styled.header`
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      position: relative;
       transition: all 0.2s ease;
+
+      & > span {
+        width: 1.25rem;
+        height: 1.25rem;
+        background: ${(props) => props.theme.colors['yellow-700']};
+        color: ${(props) => props.theme.colors.white};
+        border-radius: 50%;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+      }
 
       &:hover {
         filter: brightness(0.9);

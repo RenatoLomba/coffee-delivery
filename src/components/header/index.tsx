@@ -40,6 +40,8 @@ export const Header: FC = () => {
           }
         >
           <ShoppingCart weight="fill" size={20} />
+
+          {coffees.size > 0 && <span>{coffees.size}</span>}
         </button>
       </nav>
     </HeaderContainer>

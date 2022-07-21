@@ -110,7 +110,7 @@ export const CheckoutPage: FC = () => {
             </div>
           </OrderPricingTotal>
 
-          <SubmitOrderButton type="submit">teste</SubmitOrderButton>
+          <SubmitOrderButton type="submit">Confirmar Pedido</SubmitOrderButton>
         </div>
       </OrderSelectedCoffeeSection>
     </CheckoutContainer>

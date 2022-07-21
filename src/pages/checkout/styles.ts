@@ -111,6 +111,11 @@ export const SubmitOrderButton = styled.button`
   text-transform: uppercase;
   font-weight: ${(props) => props.theme.fontWeights.bold};
   cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${(props) => props.theme.colors['yellow-700']};
+  }
 
   &:focus {
     box-shadow: 0 0 0 2px ${(props) => props.theme.colors['yellow-700']};
