@@ -4,19 +4,21 @@ import {
   shoppingCartInitialState,
   shoppingCartReducer,
 } from '../reducers/shopping-cart'
-import type { ShoppingCartCoffee } from '../reducers/shopping-cart'
+import type { ShoppingCartCoffeeList } from '../reducers/shopping-cart'
 import {
   addCoffeeToShoppingCartAction,
   decreaseCoffeeQtyAction,
   incrementCoffeeQtyAction,
+  removeCoffeeFromShoppingCartAction,
 } from '../reducers/shopping-cart/actions'
 import type { CoffeeToAdd } from '../reducers/shopping-cart/actions'
 
 export type ShoppingCartContextData = {
-  coffees: ShoppingCartCoffee[]
+  coffees: ShoppingCartCoffeeList
   addCoffeeToShoppingCart(coffee: CoffeeToAdd): void
   incrementCoffeeQty(id: number): void
   decreaseCoffeeQty(id: number): void
+  removeCoffeeFromShoppingCart(id: number): void
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextData)
@@ -43,6 +45,10 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
     dispatch(decreaseCoffeeQtyAction(id))
   }
 
+  function removeCoffeeFromShoppingCart(id: number) {
+    dispatch(removeCoffeeFromShoppingCartAction(id))
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -50,6 +56,7 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
         addCoffeeToShoppingCart,
         incrementCoffeeQty,
         decreaseCoffeeQty,
+        removeCoffeeFromShoppingCart,
       }}
     >
       {children}
