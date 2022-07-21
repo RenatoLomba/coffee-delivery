@@ -113,6 +113,7 @@ export const CoffeeCard: FC<CoffeeCardProps> = ({ coffee }) => {
             value={coffeeOnCart?.qty}
             onIncrease={handleIncrementButtonClick}
             onDecrease={handleDecreaseButtonClick}
+            isDecreaseDisabled={!coffeeOnCart || coffeeOnCart.qty === 0}
           />
 
           <button type="button" onClick={handleShoppingCartButtonClick}>

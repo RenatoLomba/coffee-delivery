@@ -7,19 +7,19 @@ type CounterProps = {
   value?: number
   onIncrease?: (prev: number) => void
   onDecrease?: (prev: number) => void
+  isDecreaseDisabled?: boolean
 }
 
 export const Counter: FC<CounterProps> = ({
   value = 0,
   onIncrease,
   onDecrease,
+  isDecreaseDisabled = false,
 }) => {
-  const isDecreaseButtonDisabled = !value || value === 0
-
   return (
     <CounterContainer>
       <button
-        disabled={isDecreaseButtonDisabled}
+        disabled={isDecreaseDisabled}
         type="button"
         onClick={() => onDecrease?.(value)}
       >
