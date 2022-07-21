@@ -1,7 +1,10 @@
 import { ShoppingCart } from 'phosphor-react'
 import { FC } from 'react'
 
+import { useNavigate } from '@tanstack/react-location'
+
 import { Counter } from '../../../../components/counter'
+import { useShoppingCart } from '../../../../contexts/shopping-cart'
 import {
   CoffeeActions,
   CoffeeBuy,
@@ -27,6 +30,63 @@ type CoffeeCardProps = {
 }
 
 export const CoffeeCard: FC<CoffeeCardProps> = ({ coffee }) => {
+  const {
+    coffees,
+    incrementCoffeeQty,
+    addCoffeeToShoppingCart,
+    decreaseCoffeeQty,
+    removeCoffeeFromShoppingCart,
+  } = useShoppingCart()
+  const navigate = useNavigate()
+
+  const coffeeOnCart = coffees.get(coffee.id)
+
+  function handleIncrementButtonClick() {
+    const { id } = coffee
+
+    if (coffeeOnCart) {
+      incrementCoffeeQty(id)
+    } else {
+      addCoffeeToShoppingCart({
+        id,
+        name: coffee.name,
+        imgUrl: coffee.imgUrl,
+        price: coffee.price,
+      })
+    }
+  }
+
+  function handleDecreaseButtonClick() {
+    if (!coffeeOnCart || coffeeOnCart.qty === 0) return
+
+    const { id } = coffee
+
+    if (coffeeOnCart.qty === 1) {
+      removeCoffeeFromShoppingCart(id)
+    } else {
+      decreaseCoffeeQty(id)
+    }
+  }
+
+  function handleShoppingCartButtonClick() {
+    const { id } = coffee
+
+    if (coffeeOnCart) {
+      incrementCoffeeQty(id)
+    } else {
+      addCoffeeToShoppingCart({
+        id,
+        name: coffee.name,
+        imgUrl: coffee.imgUrl,
+        price: coffee.price,
+      })
+    }
+
+    navigate({
+      to: '/checkout',
+    })
+  }
+
   return (
     <CoffeeCardContainer key={coffee.id}>
       <img src={coffee.imgUrl} alt={coffee.name} />
@@ -49,9 +109,13 @@ export const CoffeeCard: FC<CoffeeCardProps> = ({ coffee }) => {
         </span>
 
         <CoffeeActions>
-          <Counter />
+          <Counter
+            value={coffeeOnCart?.qty}
+            onIncrease={handleIncrementButtonClick}
+            onDecrease={handleDecreaseButtonClick}
+          />
 
-          <button>
+          <button type="button" onClick={handleShoppingCartButtonClick}>
             <ShoppingCart weight="fill" size={20} />
           </button>
         </CoffeeActions>

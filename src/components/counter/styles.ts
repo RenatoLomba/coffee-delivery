@@ -25,7 +25,12 @@ export const CounterContainer = styled.div`
     cursor: pointer;
     color: ${(props) => props.theme.colors['purple-500']};
 
-    &:hover {
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
       color: ${(props) => props.theme.colors['purple-700']};
     }
   }

@@ -14,9 +14,15 @@ export const Counter: FC<CounterProps> = ({
   onIncrease,
   onDecrease,
 }) => {
+  const isDecreaseButtonDisabled = !value || value === 0
+
   return (
     <CounterContainer>
-      <button type="button" onClick={() => onDecrease?.(value)}>
+      <button
+        disabled={isDecreaseButtonDisabled}
+        type="button"
+        onClick={() => onDecrease?.(value)}
+      >
         <Minus size={14} weight="fill" />
       </button>
       <span>{value}</span>
