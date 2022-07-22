@@ -31,11 +31,18 @@ export const orderSchemaValidator = z.object({
     .string()
     .min(2, 'UF deve ter 2 caracteres')
     .max(2, 'UF deve ter 2 caracteres'),
-  paymentMethod: z.enum([
-    PaymentMethods.CREDIT_CARD,
-    PaymentMethods.DEBIT_CARD,
-    PaymentMethods.MONEY,
-  ]),
+  paymentMethod: z.enum(
+    [
+      PaymentMethods.CREDIT_CARD,
+      PaymentMethods.DEBIT_CARD,
+      PaymentMethods.MONEY,
+    ],
+    {
+      errorMap: () => ({
+        message: 'Escolha um método de pagamento',
+      }),
+    },
+  ),
 })
 
 export type OrderFormFields = z.infer<typeof orderSchemaValidator>

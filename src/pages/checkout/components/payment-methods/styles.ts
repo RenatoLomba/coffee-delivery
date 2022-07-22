@@ -1,6 +1,15 @@
 import styled from 'styled-components'
 
 export const PaymentMethodsContainer = styled.div`
+  span.error-message {
+    color: ${(props) => props.theme.colors['red-500']};
+    margin-bottom: 0.5rem;
+    display: block;
+    font-weight: ${(props) => props.theme.fontWeights.bold};
+  }
+`
+
+export const PaymentMethodItems = styled.div`
   display: flex;
   width: 100%;
   gap: 0.75rem;
