@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CheckoutContainer = styled.form`
   min-height: calc(100vh - 104px);
-  padding-top: 2.5rem;
+  padding: 2.5rem 0;
   display: grid;
   grid-template-columns: minmax(448px, 3fr) 2fr;
   gap: 2rem;

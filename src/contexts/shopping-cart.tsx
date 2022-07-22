@@ -16,6 +16,7 @@ import {
 import type { ShoppingCartCoffeeList } from '../reducers/shopping-cart'
 import {
   addCoffeeToShoppingCartAction,
+  clearShoppingCartAction,
   decreaseCoffeeQtyAction,
   incrementCoffeeQtyAction,
   removeCoffeeFromShoppingCartAction,
@@ -28,6 +29,7 @@ export type ShoppingCartContextData = {
   incrementCoffeeQty(id: number): void
   decreaseCoffeeQty(id: number): void
   removeCoffeeFromShoppingCart(id: number): void
+  clearShoppingCart(): void
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextData)
@@ -69,6 +71,10 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
     dispatch(removeCoffeeFromShoppingCartAction(id))
   }
 
+  function clearShoppingCart() {
+    dispatch(clearShoppingCartAction())
+  }
+
   useEffect(() => {
     const shoppingCartStateJson = superjson.stringify(shoppingCartState)
 
@@ -86,6 +92,7 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
         incrementCoffeeQty,
         decreaseCoffeeQty,
         removeCoffeeFromShoppingCart,
+        clearShoppingCart,
       }}
     >
       {children}

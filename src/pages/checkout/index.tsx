@@ -3,8 +3,9 @@ import React, { FC, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-location'
+import { Link, useNavigate } from '@tanstack/react-location'
 
+import { useOrders } from '../../contexts/orders'
 import { useShoppingCart } from '../../contexts/shopping-cart'
 import {
   OrderFormFields,
@@ -29,12 +30,14 @@ const currencyFormatted = new Intl.NumberFormat('pt-BR', {
 })
 
 export const CheckoutPage: FC = () => {
+  const navigate = useNavigate()
   const { coffees } = useShoppingCart()
+  const { createOrder } = useOrders()
   const orderForm = useForm<OrderFormFields>({
     resolver: zodResolver(orderSchemaValidator),
   })
 
-  const { handleSubmit } = orderForm
+  const { handleSubmit, reset } = orderForm
 
   const itemsTotal = useMemo(() => {
     if (coffees.size === 0) return 0
@@ -49,8 +52,27 @@ export const CheckoutPage: FC = () => {
 
   const orderTotalPrice = itemsTotal + shippingPrice
 
-  function handleOrderSubmit(data: OrderFormFields) {
-    console.log(data)
+  function handleOrderSubmit({
+    city,
+    neighborhood,
+    number,
+    paymentMethod,
+    state,
+    street,
+  }: OrderFormFields) {
+    createOrder({
+      shippingAddress: {
+        city,
+        neighborhood,
+        number,
+        state,
+        street,
+      },
+      paymentMethod,
+    })
+
+    reset()
+    navigate({ to: '/success' })
   }
 
   if (coffees.size === 0) {

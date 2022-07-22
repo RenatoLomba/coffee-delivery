@@ -3,6 +3,7 @@ export enum ShoppingCartActionTypes {
   INCREMENT_COFFEE_QTY = 'INCREMENT_COFFEE_QTY',
   DECREASE_COFFEE_QTY = 'DECREASE_COFFEE_QTY',
   REMOVE_COFFEE_FROM_SHOPPING_CART = 'REMOVE_COFFEE_FROM_SHOPPING_CART',
+  CLEAR_SHOPPING_CART = 'CLEAR_SHOPPING_CART',
 }
 
 export type CoffeeToAdd = {
@@ -48,9 +49,16 @@ export function removeCoffeeFromShoppingCartAction(id: number) {
   } as const
 }
 
+export function clearShoppingCartAction() {
+  return {
+    type: ShoppingCartActionTypes.CLEAR_SHOPPING_CART,
+  } as const
+}
+
 export type ShoppingCartAction = ReturnType<
   | typeof addCoffeeToShoppingCartAction
   | typeof incrementCoffeeQtyAction
   | typeof decreaseCoffeeQtyAction
   | typeof removeCoffeeFromShoppingCartAction
+  | typeof clearShoppingCartAction
 >

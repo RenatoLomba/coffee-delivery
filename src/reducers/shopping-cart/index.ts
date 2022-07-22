@@ -55,6 +55,12 @@ export const shoppingCartReducer = (
       })
     }
 
+    case ShoppingCartActionTypes.CLEAR_SHOPPING_CART: {
+      return produce(state, (draft) => {
+        draft.coffees.clear()
+      })
+    }
+
     default:
       return state
   }
