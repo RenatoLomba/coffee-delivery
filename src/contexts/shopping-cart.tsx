@@ -1,8 +1,17 @@
-import { createContext, FC, ReactNode, useContext, useReducer } from 'react'
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react'
+import superjson from 'superjson'
 
 import {
   shoppingCartInitialState,
   shoppingCartReducer,
+  ShoppingCartState,
 } from '../reducers/shopping-cart'
 import type { ShoppingCartCoffeeList } from '../reducers/shopping-cart'
 import {
@@ -29,6 +38,17 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
   const [shoppingCartState, dispatch] = useReducer(
     shoppingCartReducer,
     shoppingCartInitialState,
+    () => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@coffee-delivery:shopping-cart-state-1.0.0',
+      )
+
+      if (storedStateAsJSON) {
+        return superjson.parse<ShoppingCartState>(storedStateAsJSON)
+      }
+
+      return shoppingCartInitialState
+    },
   )
 
   const { coffees } = shoppingCartState
@@ -48,6 +68,15 @@ export const ShoppingCartProvider: FC<{ children: ReactNode }> = ({
   function removeCoffeeFromShoppingCart(id: number) {
     dispatch(removeCoffeeFromShoppingCartAction(id))
   }
+
+  useEffect(() => {
+    const shoppingCartStateJson = superjson.stringify(shoppingCartState)
+
+    localStorage.setItem(
+      '@coffee-delivery:shopping-cart-state-1.0.0',
+      shoppingCartStateJson,
+    )
+  }, [shoppingCartState])
 
   return (
     <ShoppingCartContext.Provider
