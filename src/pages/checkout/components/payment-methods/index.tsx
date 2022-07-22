@@ -1,23 +1,31 @@
-import { Bank, CreditCard, Money } from 'phosphor-react'
+import classNames from 'classnames'
 import { FC } from 'react'
+import { useFormContext } from 'react-hook-form'
 
+import {
+  OrderFormFields,
+  paymentMethods,
+} from '../../../../utils/validators/order-validator'
 import { PaymentMethodsContainer } from './styles'
 
 export const PaymentMethods: FC = () => {
+  const { setValue, watch } = useFormContext<OrderFormFields>()
+
   return (
     <PaymentMethodsContainer>
-      <button type="button" className="pay-card active">
-        <CreditCard size={16} />
-        <span>Cartão de Crédito</span>
-      </button>
-      <button type="button" className="pay-card">
-        <Bank size={16} />
-        <span>Cartão de Débito</span>
-      </button>
-      <button type="button" className="pay-card">
-        <Money size={16} />
-        <span>Dinheiro</span>
-      </button>
+      {paymentMethods.map(({ key, text, icon: Icon }) => (
+        <button
+          onClick={() => setValue('paymentMethod', key)}
+          key={key}
+          type="button"
+          className={classNames('pay-card', {
+            active: watch('paymentMethod') === key,
+          })}
+        >
+          <Icon size={16} />
+          <span>{text}</span>
+        </button>
+      ))}
     </PaymentMethodsContainer>
   )
 }

@@ -1,9 +1,15 @@
 import { CurrencyDollar, MapPinLine } from 'phosphor-react'
 import React, { FC, useMemo } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-location'
 
 import { useShoppingCart } from '../../contexts/shopping-cart'
+import {
+  OrderFormFields,
+  orderSchemaValidator,
+} from '../../utils/validators/order-validator'
 import { CoffeeItem } from './components/coffee-item'
 import { PaymentMethods } from './components/payment-methods'
 import { ShippingAddressForm } from './components/shipping-address-form'
@@ -24,6 +30,11 @@ const currencyFormatted = new Intl.NumberFormat('pt-BR', {
 
 export const CheckoutPage: FC = () => {
   const { coffees } = useShoppingCart()
+  const orderForm = useForm<OrderFormFields>({
+    resolver: zodResolver(orderSchemaValidator),
+  })
+
+  const { handleSubmit } = orderForm
 
   const itemsTotal = useMemo(() => {
     if (coffees.size === 0) return 0
@@ -38,6 +49,10 @@ export const CheckoutPage: FC = () => {
 
   const orderTotalPrice = itemsTotal + shippingPrice
 
+  function handleOrderSubmit(data: OrderFormFields) {
+    console.log(data)
+  }
+
   if (coffees.size === 0) {
     return (
       <EmptyCartContainer>
@@ -47,39 +62,41 @@ export const CheckoutPage: FC = () => {
   }
 
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(handleOrderSubmit)}>
       <OrderInfoSection>
         <h4>Complete seu pedido</h4>
 
-        <div className="container">
-          <div className="card">
-            <header>
-              <MapPinLine size={22} />
-              <div>
-                <span className="title">Endereço de Entrega</span>
-                <span className="subtitle">
-                  Informe o endereço onde deseja receber seu pedido
-                </span>
-              </div>
-            </header>
+        <FormProvider {...orderForm}>
+          <div className="container">
+            <div className="card">
+              <header>
+                <MapPinLine size={22} />
+                <div>
+                  <span className="title">Endereço de Entrega</span>
+                  <span className="subtitle">
+                    Informe o endereço onde deseja receber seu pedido
+                  </span>
+                </div>
+              </header>
 
-            <ShippingAddressForm />
-          </div>
-          <div className="card">
-            <header>
-              <CurrencyDollar size={22} />
-              <div>
-                <span className="title">Pagamento</span>
-                <p>
-                  O pagamento é feito na entrega. Escolha a forma que deseja
-                  pagar
-                </p>
-              </div>
-            </header>
+              <ShippingAddressForm />
+            </div>
+            <div className="card">
+              <header>
+                <CurrencyDollar size={22} />
+                <div>
+                  <span className="title">Pagamento</span>
+                  <p>
+                    O pagamento é feito na entrega. Escolha a forma que deseja
+                    pagar
+                  </p>
+                </div>
+              </header>
 
-            <PaymentMethods />
+              <PaymentMethods />
+            </div>
           </div>
-        </div>
+        </FormProvider>
       </OrderInfoSection>
 
       <OrderSelectedCoffeeSection>

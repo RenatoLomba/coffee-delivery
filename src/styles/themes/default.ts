@@ -19,6 +19,8 @@ export const defaultTheme = {
     'purple-300': '#ebe5f9',
     'purple-500': '#8047f8',
     'purple-700': '#4b2995',
+
+    'red-500': '#ab222e',
   },
   fontSizes: {
     text: {

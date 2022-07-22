@@ -20,6 +20,15 @@ export const OrderShippingAddressFormContainer = styled.div`
       &::placeholder {
         color: ${(props) => props.theme.colors['gray-600']};
       }
+
+      &.error {
+        border: 1px solid ${(props) => props.theme.colors['red-500']};
+      }
+
+      &.error:focus {
+        box-shadow: 0 0 0 2px ${(props) => props.theme.colors['red-500']};
+        border: 1px solid transparent;
+      }
     }
 
     input.w-4 {
